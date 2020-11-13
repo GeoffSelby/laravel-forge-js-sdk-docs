@@ -1,0 +1,47 @@
+---
+title: 'phpMyAdmin'
+description: Laravel Forge JavaScript SDK phpMyAdmin module.
+---
+
+## Install phpMyAdmin
+
+### Method
+
+`forge.phpMyAdmin.install(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.phpMyAdmin.install(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  database: 'forge',
+  user: 1
+}
+```
+
+---
+
+## Uninstall phpMyAdmin
+
+This method will uninstall phpMyAdmin and revert the site back to a default state.
+
+### Method
+
+`forge.phpMyAdmin.uninstall(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.phpMyAdmin.uninstall(server_id, site_id);
+```
+
+---

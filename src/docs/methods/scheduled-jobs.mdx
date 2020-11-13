@@ -1,0 +1,146 @@
+---
+title: 'Scheduled Jobs'
+description: Laravel Forge JavaScript SDK scheduled jobs module.
+---
+
+## Create a job
+
+### Method
+
+`forge.jobs.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const job = await forge.jobs.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  command: 'COMMAND_THE_JOB_RUNS',
+  frequency: 'custom',
+  user: 'root',
+  minute: '*',
+  hour: '*',
+  day: '*',
+  month: '*',
+  weekday: '*'
+}
+```
+
+#### Payload Parameters
+
+| Key       | Description                                                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| command   | The command to run.                                                                                                                       |
+| frequency | The frequency in which the job should run. Valid values are `minutely`, `hourly`, `nightly`, `weekly`, `monthly`, `reboot`, and `custom`. |
+| user      | The server user to run the command as.                                                                                                    |
+| minute    | Required if the frequency is `custom`.                                                                                                    |
+| hour      | Required if the frequency is `custom`.                                                                                                    |
+| day       | Required if the frequency is `custom`.                                                                                                    |
+| month     | Required if the frequency is `custom`.                                                                                                    |
+| weekday   | Required if the frequency is `custom`.                                                                                                    |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "job": {
+    "id": 2,
+    "command": "COMMAND_THE_JOB_RUNS",
+    "user": "root",
+    "frequency": "Nightly",
+    "cron": "0 0 * * *",
+    "status": "installing",
+    "created_at": "2016-12-16 15:56:59"
+  }
+}
+```
+
+---
+
+## List jobs
+
+### Method
+
+`forge.jobs.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const jobs = await forge.jobs.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "jobs": [
+    {
+      "id": 2,
+      "command": "COMMAND_THE_JOB_RUNS",
+      "user": "root",
+      "frequency": "nightly",
+      "cron": "0 0 * * *",
+      "status": "installing",
+      "created_at": "2016-12-16 15:56:59"
+    }
+  ]
+}
+```
+
+---
+
+## Get a job
+
+### Method
+
+`forge.jobs.get(server_id, job_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const job = await forge.jobs.get(server_id, job_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "job": {
+    "id": 2,
+    "command": "COMMAND_THE_JOB_RUNS",
+    "user": "root",
+    "frequency": "Nightly",
+    "cron": "0 0 * * *",
+    "status": "installing",
+    "created_at": "2016-12-16 15:56:59"
+  }
+}
+```
+
+---
+
+## Delete a job
+
+### Method
+
+`forge.jobs.delete(server_id, job_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.jobs.delete(server_id, job_id);
+```
+
+---

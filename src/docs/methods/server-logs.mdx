@@ -1,0 +1,36 @@
+---
+title: 'Server Logs'
+description: Laravel Forge JavaScript SDK server logs module.
+---
+
+## Get server logs
+
+### Method
+
+`forge.logs.get(server_id, file_type)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const logs = await forge.logs.get(server_id, file_type);
+```
+
+### File Types
+
+- `nginx_access`
+- `nginx_error`
+- `database`
+- `php7x` (where `x` is a valid version number, e.g. `php71`) or `php56`
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "path": "/var/log/mysql/error.log",
+  "content": "2020-08-18T10:22:01.238990Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.21'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.\n2020-08-18T10:22:01.359309Z 0 [System] [MY-013172] [Server] Received SHUTDOWN from user <via user signal>. Shutting down mysqld (Version: 8.0.21).\n2020-08-18T10:22:03.644177Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.21)  MySQL Community Server - GPL.\n2020-08-18T10:22:04.183385Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.21) starting as process 42752\n2020-08-18T10:22:04.193962Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.\n2020-08-18T10:22:04.530305Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.\n2020-08-18T10:22:04.662877Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock\n2020-08-18T10:22:04.749019Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.\n2020-08-18T10:22:04.749453Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.\n2020-08-18T10:22:04.775994Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.21'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.\n"
+}
+```
+
+---

@@ -1,0 +1,381 @@
+---
+title: 'Servers'
+description: Laravel Forge JavaScript SDK servers module.
+---
+
+## Create a Server
+
+### Method
+
+`forge.servers.create(payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const user = await forge.servers.create(payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  provider: 'ocean2',
+  credential_id: 1,
+  name: 'test-via-api',
+  size: '512MB',
+  database: 'test123',
+  php_version: 'php71',
+  region: 'ams2',
+  recipe_id: null,
+}
+```
+
+#### Payload Parameters
+
+| Key                | Description                                                                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| provider           | The server provider. Valid values are `ocean2` for Digital Ocean, `linode`, `vultr`, `aws`, `hetzner` and `custom`.                                                        |
+| credential_id      | This is only required when the provider is not `custom`.                                                                                                                   |
+| region             | The name of the region where the server will be created. This value is not required you are building a Custom VPS server. [Valid region identifiers](https://example.com). |
+| ip_address         | The IP Address of the server. Only required when the provider is `custom`.                                                                                                 |
+| private_ip_address | The Private IP Address of the server. Only required when the provider is `custom`.                                                                                         |
+| php_version        | Valid values are `php74`, `php73`, `php72`, `php71`, `php70`, and `php56`.                                                                                                 |
+| database           | The name of the database Forge should create when building the server. If omitted, `forge` will be used.                                                                   |
+| maria              | Indicates if MariaDB should be installed. Otherwise, MySQL will be installed.                                                                                              |
+| database_type      | Valid values are `mysql`, `mysql8`, `mariadb`, `postgres`.                                                                                                                 |
+| node_balancer      | Determines if the server should be provisioned as a load balancer.                                                                                                         |
+| network            | An array of server IDs that the server should be able to connect to.                                                                                                       |
+| recipe_id          | An optional ID of a recipe to run after provisioning.                                                                                                                      |
+| aws_vpc_id         | ID of the existing VPC                                                                                                                                                     |
+| aws_subnet_id      | ID of the existing subnet                                                                                                                                                  |
+| aws_vpc_name       | When creating a new one                                                                                                                                                    |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "server": {
+    "id": 16,
+    "credential_id": 1,
+    "name": "test-via-api",
+    "size": "01",
+    "region": "ams2",
+    "php_version": "php71",
+    "ip_address": null,
+    "private_ip_address": null,
+    "blackfire_status": null,
+    "papertrail_status": null,
+    "revoked": false,
+    "created_at": "2016-12-15 15:04:05",
+    "is_ready": false,
+    "network": []
+  },
+  "sudo_password": "baracoda",
+  "database_password": "spotted_eagle_ray"
+}
+```
+
+---
+
+## List Servers
+
+### Method
+
+`forge.servers.list()`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const servers = await forge.servers.list();
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "servers": [
+    {
+      "id": 1,
+      "credential_id": 1,
+      "name": "test-via-api",
+      "size": "512MB",
+      "region": "Amsterdam 2",
+      "php_version": "php71",
+      "ip_address": "37.139.3.148",
+      "private_ip_address": "10.129.3.252",
+      "blackfire_status": null,
+      "papertrail_status": null,
+      "revoked": false,
+      "created_at": "2016-12-15 18:38:18",
+      "is_ready": true,
+      "network": []
+    }
+  ]
+}
+```
+
+---
+
+## Get a Server
+
+### Method
+
+`forge.servers.get(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const server = await forge.servers.get(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "server": {
+    "id": 1,
+    "credential_id": 1,
+    "name": "test-via-api",
+    "size": "512MB",
+    "region": "Amsterdam 2",
+    "php_version": "php71",
+    "ip_address": "37.139.3.148",
+    "private_ip_address": "10.129.3.252",
+    "blackfire_status": null,
+    "papertrail_status": null,
+    "revoked": false,
+    "created_at": "2016-12-15 18:38:18",
+    "is_ready": true,
+    "network": []
+  }
+}
+```
+
+---
+
+## Update a Server
+
+### Method
+
+`forge.servers.update(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const server = forge.servers.update(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'renamed-server',
+  size: '512MB',
+  ip_address: '192.241.143.108',
+  private_ip_address: '10.136.8.40',
+  max_upload_size: 123,
+  network: [
+    2,
+    3,
+  ],
+  timezone: 'Europe/London',
+}
+```
+
+#### Payload Parameters
+
+The payload parameters are the same as [`forge.servers.create()`](#create-a-server).
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "server": {
+    "id": 16,
+    "credential_id": 1,
+    "name": "test-via-api",
+    "size": "512MB",
+    "region": "Amsterdam 2",
+    "php_version": "php71",
+    "ip_address": null,
+    "private_ip_address": null,
+    "blackfire_status": null,
+    "papertrail_status": null,
+    "revoked": false,
+    "created_at": "2016-12-15 15:04:05",
+    "is_ready": false,
+    "network": ⊖[
+      2,
+      3
+    ]
+  }
+}
+```
+
+---
+
+## Delete a Server
+
+### Method
+
+`forge.servers.delete(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.servers.delete(server_id);
+```
+
+---
+
+## Update Database Password
+
+This method updates Forge's copy of the primary database password which should be used to authenticate the creation of new databases and database users. This is typically only needed if you are working with a Forge server that was built before database administration was added to Forge.
+
+### Method
+
+`forge.servers.updateDbPassword(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.servers.updateDbPassword(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  password: 'new_password',
+}
+```
+
+#### Payload Parameters
+
+| Key      | Description      |
+| -------- | ---------------- |
+| password | The new password |
+
+---
+
+## Reboot a Server
+
+### Method
+
+`forge.servers.reboot(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.servers.reboot(server_id);
+```
+
+---
+
+## Revoke Forge Access to a Server
+
+### Method
+
+`forge.servers.revoke(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.servers.revoke(server_id);
+```
+
+---
+
+## Reconnect a Revoked Server
+
+This method will return an SSH key which you will need to add to the server. Once the key has been added to the server, you may "reactivate" it.
+
+### Method
+
+`forge.servers.reconnect(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const server = await forge.servers.reconnect(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "public_key": "CONTENT_OF_THE_PUBLIC_KEY"
+}
+```
+
+---
+
+## Reactivate a Revoked Server
+
+### Method
+
+`forge.servers.reactivate(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.servers.reactivate(server_id);
+```
+
+---
+
+## Get Recent Events
+
+### Method
+
+`forge.servers.events([server_id])`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const events = forge.servers.events();
+```
+
+Optionally, you can pass a `server_id` to get recent events for only that server:
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const events = forge.servers.events(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+[
+  {
+    "server_id": 18,
+    "ran_as": "forge",
+    "server_name": "billowing-cliff",
+    "description": "Deploying PHP Info Page.",
+    "created_at": "2017-04-28 18:08:44"
+  }
+]
+```

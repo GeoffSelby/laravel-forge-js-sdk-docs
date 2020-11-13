@@ -1,0 +1,110 @@
+---
+title: 'Webhooks'
+description: Laravel Forge JavaScript SDK webhooks module.
+---
+
+## Create a webhook
+
+### Method
+
+`forge.webhooks.create(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const webhook = await forge.webhooks.create(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  url: 'https://domain.com';
+}
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "url": "https://domain.com"
+}
+```
+
+---
+
+## List all webhooks
+
+### Method
+
+`forge.webhooks.list(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const webhooks = await forge.webhooks.list(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "webhooks": [
+    {
+      "id": 10,
+      "url": "http://domain.com",
+      "created_at": "2018-10-10 17:01:18"
+    }
+  ]
+}
+```
+
+---
+
+## Get a webhook
+
+### Method
+
+`forge.webhooks.get(server_id, site_id, webhook_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const webhook = await forge.webhooks.get(server_id, site_id, webhook_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "webhook": {
+    "id": 10,
+    "url": "http://domain.com",
+    "created_at": "2018-10-10 17:01:18"
+  }
+}
+```
+
+---
+
+## Delete a webhook
+
+### Method
+
+`forge.webhooks.delete(server_id, site_id, webhook_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.webhooks.delete(server_id, site_id, webhook_id);
+```
+
+---

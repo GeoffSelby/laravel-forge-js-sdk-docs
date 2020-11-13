@@ -1,22 +1,39 @@
+import Navigation from '@rocketseat/gatsby-theme-docs/src/components/Docs/PostNav';
+
 # Introduction
 
-Rocket Docs is a complete and awesome Gatsby Theme for documentation websites. We've
-developed it to be easy to use and customize. Forget about other
-things and focus on what matters: **writing docs.**
+Laravel Forge JavaScript SDK is a complete JavaScript wrapper for the official [Laravel Forge API](https://forge.laravel.com/api-documentation). It was designed to be compatible with both Node.js backends and client-side browsers.
 
-## Features
+## Getting Started
 
-- 📝 MDX for docs;
-- 🛣 Yaml-based sidebar navigation;
-- 📱 Responsive and mobile friendly;
-- 🖥 Code highlighting with [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) and [react-live](https://github.com/FormidableLabs/react-live) support;
-- 🥇 SEO (Sitemap, schema.org data, Open Graph and Twitter tags).
-- 📈 Google Analytics support;
-- 📄 Custom docs schema;
-- 🖱 Table of Contents;
-- ⚡️ Offline Support & WebApp Manifest;
-- and much more 🔥
+### Installation
 
-<br />
+```bash
+# Using Yarn (recommended)
+yarn add @geoffcodesthings/forge-js
 
-[Get started now!](/getting-started)
+# Using NPM
+npm install --save @geoffcodesthings/forge-js
+```
+
+### Basic Usage
+
+The SDK uses the `fetch` api to make http requests to the Forge API. Because these calls are asynchronous, be sure to use `async/await`. Of course, you could resolve the promise with `.then()` if you prefer.
+
+```js
+import Forge from '@geoffcodesthings/forge-js';
+
+const forge = new Forge('API_TOKEN');
+
+const servers = await forge.servers.get();
+
+console.log(servers);
+```
+
+<Navigation
+  prev={null}
+  next={{
+    label: 'Explore the methods',
+    link: '/methods/user',
+  }}
+/>

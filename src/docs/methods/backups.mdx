@@ -1,0 +1,330 @@
+---
+title: 'Backups'
+description: Laravel Forge JavaScript SDK backups module.
+---
+
+> **Database backups are only available on the Business plan.**
+
+## Create a backup configuration
+
+### Method
+
+`forge.backups.createConfig(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const backupConfig = await forge.backups.createConfig(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  provider: 'spaces',
+  credentials: {
+    endpoint: 'https://my-endpoint.com',
+    region: 'region-key',
+    bucket: 'bucket-name',
+    access_key: '',
+    secret_key: ''
+  },
+  frequency: {
+    type: 'weekly',
+    time: '12:30',
+    day: 1
+  },
+  directory: 'backups/server/db',
+  email: 'forge@laravel.com',
+  retention: 7,
+  databases: [
+    24
+  ]
+}
+```
+
+#### Available Providers
+
+| Key    | Description                        |
+| ------ | ---------------------------------- |
+| s3     | Amazon S3                          |
+| spaces | DigitalOcean Spaces                |
+| custom | Custom (S3 Compatible, e.g. MinIO) |
+
+When supplying a `custom` provider, you **must** also provide an `endpoint`.
+
+#### Frequency options
+
+- `hourly`
+- `daily` - you must supply a `time` in 24 hour format
+- `weekly` - you must supply a `time` in 24 hour format and a `day` option 0 (Sunday) - 6 (Saturday)
+- `custom` - you must supply a `custom` value, as a valid cron expression
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "backup": {
+    "id": 10,
+    "day_of_week": null,
+    "time": null,
+    "provider": "spaces",
+    "provider_name": "DigitalOcean Spaces",
+    "status": "installing",
+    "databases": [
+      {
+        "id": 24,
+        "name": "forge",
+        "status": "installed",
+        "created_at": "2020-01-13 15:47:33"
+      }
+    ],
+    "backups": [],
+    "last_backup_time": null
+  }
+}
+```
+
+---
+
+## List backup configurations
+
+### Method
+
+`forge.backups.listConfigs(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const backupConfigs = await forge.backups.listConfigs(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "backups": [
+    {
+      "id": 10,
+      "day_of_week": null,
+      "time": null,
+      "provider": "spaces",
+      "provider_name": "DigitalOcean Spaces",
+      "status": "installed",
+      "databases": [
+        {
+          "id": 100,
+          "name": "forge",
+          "status": "installed",
+          "created_at": "2020-01-01 10:00:00"
+        }
+      ],
+      "backups": [
+        {
+          "id": 144,
+          "backup_id": 10,
+          "status": "success",
+          "restore_status": null,
+          "archive_path": "s3://backup-configs/server/db/backup-10-20200101123601.tar.gz",
+          "duration": 4,
+          "date": "1st Jan 12:36 PM"
+        }
+      ],
+      "last_backup_time": "3 days ago"
+    }
+  ]
+}
+```
+
+---
+
+## Get a backup configuration
+
+### Method
+
+`forge.backups.getConfig(server_id, config_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const backupConfig = await forge.backups.getConfig(server_id, config_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "backup": {
+    "id": 10,
+    "day_of_week": null,
+    "time": null,
+    "provider": "spaces",
+    "provider_name": "DigitalOcean Spaces",
+    "status": "installed",
+    "databases": [
+      {
+        "id": 24,
+        "name": "forge",
+        "status": "installed",
+        "created_at": "2020-01-13 15:47:33"
+      }
+    ],
+    "backups": [],
+    "last_backup_time": null
+  }
+}
+```
+
+---
+
+## Update backup configuration
+
+### Method
+
+`forge.backups.updateConfig(server_id, config_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const backupConfig = await forge.backups.updateConfig(
+  server_id,
+  config_id,
+  payload,
+);
+```
+
+### Payload
+
+```js
+{
+  provider: 'spaces',
+  credentials: {
+    endpoint: 'https://my-endpoint.com',
+    region: 'region-key',
+    bucket: 'bucket-name',
+    access_key: '',
+    secret_key: ''
+  },
+  frequency: {
+    type: 'weekly',
+    time: '12:30',
+    day: 1
+  },
+  directory: 'backups/server/db',
+  email: 'forge@laravel.com',
+  retention: 7
+}
+```
+
+_The payload and options are the same for updating as they are for creating._
+
+> **Note: You cannot change the databases to backup of an existing backup configuration.**
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "backup": {
+    "id": 10,
+    "day_of_week": null,
+    "time": null,
+    "provider": "spaces",
+    "provider_name": "DigitalOcean Spaces",
+    "status": "updating",
+    "databases": [
+      {
+        "id": 24,
+        "name": "forge",
+        "status": "installed",
+        "created_at": "2020-01-13 15:47:33"
+      }
+    ],
+    "backups": [],
+    "last_backup_time": null
+  }
+}
+```
+
+---
+
+## Delete backup configuration
+
+### Method
+
+`forge.backups.deleteConfig(server_id, config_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.backups.deleteConfig(server_id, config_id);
+```
+
+---
+
+## Manually run backup configuration
+
+### Method
+
+`forge.backups.runConfig(server_id, config_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.backups.runConfig(server_id, config_id);
+```
+
+---
+
+## Restore a backup
+
+### Method
+
+`forge.backups.restore(server_id, config_id, backup_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.backups.restore(server_id, config_id, backup_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  database: 7;
+}
+```
+
+> If no `database` value is provided, Forge will restore the first database available.
+
+---
+
+## Delete a backup
+
+### Method
+
+`forge.backups.delete(server_id, config_id, backup_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.backups.delete(server_id, config_id, backup_id);
+```
+
+---

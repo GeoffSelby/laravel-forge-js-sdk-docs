@@ -1,0 +1,92 @@
+---
+title: 'Git Projects'
+description: Laravel Forge JavaScript SDK Git projects module
+---
+
+## Install new git project
+
+### Method
+
+`forge.git.install(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.git.install(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  provider: 'github',
+  repository: 'username/repository',
+  branch: 'main',
+  composer: true
+}
+```
+
+#### Payload Parameters
+
+| Key        | Description                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
+| provider   | The repository provider. Valid values are `github`, `gitlab`, `gitlab-custom`, `bitbucket`, and `custom`. |
+| repository | The repository you want to install. The format should be `username/repository`.                           |
+| branch     | The branch of the repository you want to install.                                                         |
+| composer   | Whether to install Composer dependencies. Valid values are `true` or `false`.                             |
+
+---
+
+## Update a repository
+
+### Method
+
+`forge.git.update(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.git.update(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  provider: 'github',
+  repository: 'username/repository',
+  branch: 'main',
+  composer: true
+}
+```
+
+#### Payload Parameters
+
+| Key        | Description                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
+| provider   | The repository provider. Valid values are `github`, `gitlab`, `gitlab-custom`, `bitbucket`, and `custom`. |
+| repository | The repository you want to install. The format should be `username/repository`.                           |
+| branch     | The branch of the repository you want to install.                                                         |
+| composer   | Whether to install Composer dependencies. Valid values are `true` or `false`.                             |
+
+---
+
+## Remove a project
+
+### Method
+
+`forge.git.remove(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.git.remove(server_id, site_id);
+```
+
+---

@@ -1,0 +1,96 @@
+---
+title: 'Configuration Files'
+description: Laravel Forge JavaScript SDK configuration files module.
+---
+
+## Get Nginx configuration
+
+### Method
+
+`forge.config.getNginx(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const nginxConfig = await forge.config.getNginx(server_id, site_id);
+```
+
+### Example Response
+
+The response is a string for this request.
+
+---
+
+## Update Nginx configuration
+
+### Method
+
+`forge.config.updateNginx(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const updatedConfig = await forge.config.updateNginx(
+  server_id,
+  site_id,
+  payload,
+);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  content: 'CONTENT';
+}
+```
+
+---
+
+## Get .env file
+
+### Method
+
+`forge.config.getEnv(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const envFile = await forge.config.getEnv(server_id, site_id);
+```
+
+### Example Response
+
+The response is a string for this request.
+
+---
+
+## Update .env file
+
+### Method
+
+`forge.config.updateEnv(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const updatedEnv = await forge.config.updateEnv(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  content: 'CONTENT';
+}
+```
+
+---

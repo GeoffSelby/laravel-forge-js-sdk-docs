@@ -1,0 +1,176 @@
+---
+title: 'PHP'
+description: Laravel Forge JavaScript SDK PHP module.
+---
+
+## List PHP versions
+
+### Method
+
+`forge.php.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const phpVersions = await forge.php.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+[
+  {
+    "id": 29,
+    "version": "php74",
+    "status": "installed",
+    "displayable_version": "PHP 7.4",
+    "binary_name": "php7.4",
+    "used_as_default": false,
+    "used_on_cli": false
+  },
+  {
+    "id": 30,
+    "version": "php73",
+    "status": "installed",
+    "displayable_version": "PHP 7.3",
+    "binary_name": "php7.3",
+    "used_as_default": true,
+    "used_on_cli": true
+  },
+  {
+    "id": 31,
+    "version": "php72",
+    "status": "installed",
+    "displayable_version": "PHP 7.2",
+    "binary_name": "php7.2",
+    "used_as_default": false,
+    "used_on_cli": false
+  },
+  {
+    "id": 32,
+    "version": "php71",
+    "status": "installed",
+    "displayable_version": "PHP 7.1",
+    "binary_name": "php7.1",
+    "used_as_default": false,
+    "used_on_cli": false
+  },
+  {
+    "id": 33,
+    "version": "php56",
+    "status": "installed",
+    "displayable_version": "PHP 5.6",
+    "binary_name": "php5.6",
+    "used_as_default": false,
+    "used_on_cli": false
+  }
+]
+```
+
+---
+
+## Install PHP version
+
+### Method
+
+`forge.php.install(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.php.install(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  version: 'php74'
+}
+```
+
+#### Available Versions
+
+| Key   | Description |
+| ----- | ----------- |
+| php56 | PHP 5.6     |
+| php70 | PHP 7.0     |
+| php71 | PHP 7.1     |
+| php72 | PHP 7.2     |
+| php73 | PHP 7.3     |
+| php74 | PHP 7.4     |
+
+---
+
+## Upgrade PHP patch version
+
+You must supply the version to be patched.
+
+### Method
+
+`forge.php.update(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.php.update(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  version: 'php74'
+}
+```
+
+#### Available Versions
+
+| Key   | Description |
+| ----- | ----------- |
+| php56 | PHP 5.6     |
+| php70 | PHP 7.0     |
+| php71 | PHP 7.1     |
+| php72 | PHP 7.2     |
+| php73 | PHP 7.3     |
+| php74 | PHP 7.4     |
+
+---
+
+## Enable OPCache
+
+### Method
+
+`forge.php.enableOPcache(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.php.enableOPcache(server_id);
+```
+
+---
+
+## Disable OPCache
+
+### Method
+
+`forge.php.disableOPcache(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.php.disableOPcache(server_id);
+```
+
+---

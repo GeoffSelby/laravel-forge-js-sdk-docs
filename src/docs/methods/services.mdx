@@ -1,0 +1,314 @@
+---
+title: 'Services'
+description: Laravel Forge JavaScript SDK services module.
+---
+
+## Start a service
+
+### Method
+
+`forge.services.start(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.start(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  service: 'service-name';
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                       |
+| ------- | --------------------------------- |
+| service | The name of the service to start. |
+
+---
+
+## Stop a service
+
+### Method
+
+`forge.services.stop(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.stop(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  service: 'service-name';
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                      |
+| ------- | -------------------------------- |
+| service | The name of the service to stop. |
+
+---
+
+## Restart a service
+
+### Method
+
+`forge.services.restart(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.restart(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  service: 'service-name';
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                      |
+| ------- | -------------------------------- |
+| service | The name of the service to stop. |
+
+---
+
+## Reboot MySQL
+
+### Method
+
+`forge.services.rebootMysql(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.rebootMysql(server_id);
+```
+
+---
+
+## Stop MySQL
+
+### Method
+
+`forge.services.stopMysql(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.stopMysql(server_id);
+```
+
+---
+
+## Reboot Nginx
+
+### Method
+
+`forge.services.rebootNginx(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.rebootNginx(server_id);
+```
+
+---
+
+## Stop Nginx
+
+### Method
+
+`forge.services.stopNginx(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.stopNginx(server_id);
+```
+
+---
+
+## Reboot Postgres
+
+### Method
+
+`forge.services.rebootPostgres(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.rebootPostgres(server_id);
+```
+
+---
+
+## Stop Postgres
+
+### Method
+
+`forge.services.stopPostgres(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.stopPostgres(server_id);
+```
+
+---
+
+## Reboot PHP
+
+### Method
+
+`forge.services.rebootPhp(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.rebootPhp(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  version: 'php74';
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| version | The version of PHP to reboot |
+
+---
+
+## Install Blackfire
+
+### Method
+
+`forge.services.installBlackfire(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.installBlackfire(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  server_id: '...',
+  server_token: '...'
+}
+```
+
+#### Payload Parameters
+
+| Key          | Description                                                              |
+| ------------ | ------------------------------------------------------------------------ |
+| server_id    | Your [Blackfire Server ID](https://blackfire.io/account/credentials)     |
+| server_token | Your [Blackfire Server Token] (https://blackfire.io/account/credentials) |
+
+---
+
+## Remove Blackfire
+
+### Method
+
+`forge.services.removeBlackfire(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.removeBlackfire(server_id);
+```
+
+---
+
+## Install Papertrail
+
+### Method
+
+`forge.services.installPapertrail(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.installPapertrail(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  host: '192.241.143.108';
+}
+```
+
+#### Payload Parameters
+
+| Key  | Description                                                                |
+| ---- | -------------------------------------------------------------------------- |
+| host | Your [Papertrail log destination](https://papertrailapp.com/systems/setup) |
+
+---
+
+## Remove Papertrail
+
+### Method
+
+`forge.services.removePapertrail(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.removePapertrail(server_id);
+```
+
+---

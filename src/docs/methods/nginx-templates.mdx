@@ -1,0 +1,178 @@
+---
+title: 'Nginx Templates'
+description: Laravel Forge JavaScript SDK Nginx templates module.
+---
+
+## Create a Nginx template
+
+### Method
+
+`forge.nginxTemplates.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const template = await forge.nginxTemplates.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'My Nginx Template',
+  content: 'server { listen {{ PORT }}; location = / { ... } }'
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| name    | The name of the template.    |
+| content | The content of the template. |
+
+> Nginx templates support multiple variables that will be replaced with real data when the site is being created. For more information on variables, see the [Nginx templates documentation](https://forge.laravel.com/docs/1.0/servers/nginx-templates.html).
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "template": {
+    "id": 1,
+    "server_id": 50,
+    "name": "My Nginx Template",
+    "content": "server { listen {{ PORT }}; location = / { ... } }"
+  }
+}
+```
+
+---
+
+## List all Nginx templates
+
+### Method
+
+`forge.nginxTemplates.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const templates = await forge.nginxTemplates.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "templates": [
+    {
+      "id": 1,
+      "server_id": 50,
+      "name": "My Nginx Template",
+      "content": "server { listen {{ PORT }}; location = / { ... } }"
+    }
+  ]
+}
+```
+
+---
+
+## Get a Nginx template
+
+### Method
+
+`forge.nginxTemplates.get(server_id, template_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const template = await forge.nginxTemplates.get(server_id, template_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "template": {
+    "id": 1,
+    "server_id": 50,
+    "name": "My Nginx Template",
+    "content": "server { listen {{ PORT }}; location = / { ... } }"
+  }
+}
+```
+
+---
+
+## Update a Nginx template
+
+### Method
+
+`forge.nginxTemplates.update(server_id, template_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const template = await forge.nginxTemplates.update(
+  server_id,
+  template_id,
+  payload,
+);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'My Updated Nginx Template',
+  content: 'server { listen {{ PORT }}; location = / { ... } }'
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                  |
+| ------- | ---------------------------- |
+| name    | The name of the template.    |
+| content | The content of the template. |
+
+> Nginx templates support multiple variables that will be replaced with real data when the site is being created. For more information on variables, see the [Nginx templates documentation](https://forge.laravel.com/docs/1.0/servers/nginx-templates.html).
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "template": {
+    "id": 1,
+    "server_id": 50,
+    "name": "My Updated Nginx Template",
+    "content": "server { listen {{ PORT }}; location = / { ... } }"
+  }
+}
+```
+
+---
+
+## Delete a Nginx template
+
+### Method
+
+`forge.nginxTemplates.delete(server_id, template_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.nginxTemplates.delete(server_id, template_id);
+```
+
+---

@@ -1,0 +1,130 @@
+---
+title: 'Deployment'
+description: Laravel Forge JavaScript SDK deployment module.
+---
+
+## Enable quick deployment
+
+### Method
+
+`forge.deployment.enable(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.deployment.enable(server_id, site_id);
+```
+
+---
+
+## Disable quick deployment
+
+### Method
+
+`forge.deployment.disable(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.deployment.disable(server_id, site_id);
+```
+
+---
+
+## Get deployment script
+
+### Method
+
+`forge.deployment.getScript(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const script = await forge.deployment.getScript(server_id, site_id);
+```
+
+> The response is a string for this request.
+
+---
+
+## Update deployment script
+
+### Method
+
+`forge.deployment.updateScript(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.deployment.updateScript(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  content: 'CONTENT_OF_THE_SCRIPT';
+}
+```
+
+---
+
+## Deploy now
+
+### Method
+
+`forge.deployment.deploy(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.deployment.deploy(server_id, site_id);
+```
+
+---
+
+## Reset deployment status
+
+### Method
+
+`forge.deployment.reset(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.deployment.reset(server_id, site_id);
+```
+
+---
+
+## Get deployment log
+
+### Method
+
+`forge.deployment.log(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const deploymentLog = await forge.deployment.log(server_id, site_id);
+```
+
+### Example Response
+
+> The response is a string for this request.
+
+---

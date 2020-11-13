@@ -1,0 +1,47 @@
+---
+title: 'WordPress'
+description: Laravel Forge JavaScript SDK WordPress module.
+---
+
+## Install WordPress
+
+### Method
+
+`forge.wordpress.install(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.wordpress.install(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  database: 'forge',
+  user: 1
+}
+```
+
+---
+
+## Uninstall WordPress
+
+This method will uninstall WordPress and revert the site back to a default state.
+
+### Method
+
+`forge.wordpress.uninstall(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.wordpress.uninstall(server_id, site_id);
+```
+
+---

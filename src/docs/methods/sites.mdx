@@ -1,0 +1,456 @@
+---
+title: 'Sites'
+description: Laravel Forge JavaScript SDK sites module.
+---
+
+## Create a site
+
+### Method
+
+`forge.sites.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const site = await forge.sites.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  domain: 'site.com',
+  project_type: 'php',
+  aliases: [
+    'alias1.com',
+    'alias2.com'
+  ],
+  directory: '/test',
+  isolated: true,
+  username: 'forge',
+  database: 'site-com-db'
+}
+```
+
+#### Payload Parmeters
+
+| Key          | Description                                                                                                                                                           |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| domain       | The domain of the new site.                                                                                                                                           |
+| project_type | The type of project. Available types can be found below.                                                                                                              |
+| aliases      | An array of site aliases you would like to add.                                                                                                                       |
+| directory    | The web directory. For Laravel applications this is `/public`, but other projects may live elsewhere.                                                                 |
+| isolated     | Whether the PHP-FPM process should run under its own user account. [Learn about Website Isolation here](https://forge.laravel.com/docs/1.0/sites/user-isolation.html).|
+| username     | The new user that should be created if `isolated` is `true`.                                                                                                          |
+| database     | The name of the database to be created. This is optional.                                                                                                             |
+
+#### Available project types
+
+| Key          | Description                      |
+| ------------ | -------------------------------- |
+| php          | General PHP/Laravel Application. |
+| html         | Static HTML site.                |
+| symfony      | Symfony Application.             |
+| symfony_dev  | Symfony (Dev) Application        |
+| symfony_four | Symfony >4.0 Application         |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "site": {
+    "id": 2,
+    "name": "site.com",
+    "aliases": [
+      "alias1.com",
+      "alias2.com"
+    ],
+    "directory": "/test",
+    "wildcards": false,
+    "isolated": true,
+    "username": "forge",
+    "status": "installing",
+    "repository": null,
+    "repository_provider": null,
+    "repository_branch": null,
+    "repository_status": null,
+    "quick_deploy": false,
+    "project_type": "php",
+    "app": null,
+    "app_status": null,
+    "slack_channel": null,
+    "telegram_chat_id": null,
+    "telegram_chat_title": null,
+    "created_at": "2016-12-16 16:38:08",
+    "deployment_url": "...",
+    "tags": []
+  }
+}
+```
+
+---
+
+## List a servers sites
+
+### Method
+
+`forge.sites.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const sites = await forge.sites.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "sites": [
+    {
+      "id": 2,
+      "name": "site.com",
+      "username": "laravel",
+      "directory": "/test",
+      "wildcards": false,
+      "status": "installing",
+      "repository": null,
+      "repository_provider": null,
+      "repository_branch": null,
+      "repository_status": null,
+      "quick_deploy": false,
+      "project_type": "php",
+      "app": null,
+      "app_status": null,
+      "slack_channel": null,
+      "telegram_chat_id": null,
+      "telegram_chat_title": null,
+      "deployment_url": "...",
+      "created_at": "2016-12-16 16:38:08",
+      "tags": []
+    }
+  ]
+}
+```
+
+---
+
+## Get a site
+
+### Method
+
+`forge.sites.get(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const site = await forge.sites.get(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "site": {
+    "id": 2,
+    "name": "site.com",
+    "aliases": [
+      "alias1.com"
+    ],
+    "username": "laravel",
+    "directory": "/test",
+    "wildcards": false,
+    "status": "installing",
+    "repository": null,
+    "repository_provider": null,
+    "repository_branch": null,
+    "repository_status": null,
+    "quick_deploy": false,
+    "project_type": "php",
+    "app": null,
+    "app_status": null,
+    "slack_channel": null,
+    "telegram_chat_id": null,
+    "telegram_chat_title": null,
+    "deployment_url": "...",
+    "created_at": "2016-12-16 16:38:08",
+    "tags": []
+  }
+}
+```
+
+---
+
+## Update a site
+
+This method is used to update the "web directory", primary name, aliases or whether to use wildcard sub-domains for a given site.
+
+### Method
+
+`forge.sites.update(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const updatedSite = await forge.sites.update(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+directory: '/some/path',
+name: 'site-new-name.com',
+aliases: [
+  'alias1.com',
+  'alias2.com'
+],
+wildcards: true
+```
+
+#### Payload Parameters
+
+| Key       | Description                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| directory | The web directory. For Laravel applications this is `/public`, but other projects may live elsewhere. |
+| name      | The name of the new site.                                                                             |
+| aliases   | An array of site aliases you would like to add.                                                       |
+| wildcards | Whether to use wildcard sub-domains or not.                                                           |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "site": {
+    "id": 2,
+    "name": "site-new-name.com",
+    "aliases": [
+      "alias1.com",
+      "alias2.com"
+    ],
+    "username": "laravel",
+    "directory": "/some/path",
+    "wildcards": false,
+    "status": "installing",
+    "repository": null,
+    "repository_provider": null,
+    "repository_branch": null,
+    "repository_status": null,
+    "quick_deploy": false,
+    "project_type": "php",
+    "app": null,
+    "app_status": null,
+    "slack_channel": null,
+    "telegram_chat_id": null,
+    "telegram_chat_title": null,
+    "deployment_url": "...",
+    "created_at": "2016-12-16 16:38:08",
+    "tags": []
+  }
+}
+```
+
+---
+
+## Change site PHP version
+
+### Method
+
+`forge.sites.php(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.sites.php(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  version: 'php74'
+}
+```
+
+#### Available Versions
+
+| Key   | Description |
+| ----- | ----------- |
+| php56 | PHP 5.6     |
+| php70 | PHP 7.0     |
+| php71 | PHP 7.1     |
+| php72 | PHP 7.2     |
+| php73 | PHP 7.3     |
+| php74 | PHP 7.4     |
+
+---
+
+## Add site aliases
+
+Use this endpoint to add additional site aliases and keep the exiting ones.
+
+### Method
+
+`forge.sites.alias(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const updatedSite = await forge.sites.alias(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  aliases: [
+    'alias1.com',
+    'alias2.com'
+  ]
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                                     |
+| ------- | --------------------------------------------    |
+| aliases | An array of site aliases you would like to add. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "site": {
+    "id": 2,
+    "name": "site.com",
+    "aliases": [
+      "alias1.com",
+      "alias2.com"
+    ],
+    "username": "laravel",
+    "directory": "/",
+    "wildcards": false,
+    "status": "installing",
+    "repository": null,
+    "repository_provider": null,
+    "repository_branch": null,
+    "repository_status": null,
+    "quick_deploy": false,
+    "project_type": "php",
+    "app": null,
+    "app_status": null,
+    "slack_channel": null,
+    "telegram_chat_id": null,
+    "telegram_chat_title": null,
+    "deployment_url": "...",
+    "created_at": "2016-12-16 16:38:08",
+    "tags": []
+  }
+}
+```
+
+---
+
+## Delete a site
+
+### Method
+
+`forge.sites.delete(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.sites.delete(server_id, site_id);
+```
+
+---
+
+## Load balancing
+
+### Method
+
+`forge.sites.balance(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.sites.balance(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  servers: [
+    {
+      id: 2,
+      weight: 5
+    },
+    {
+      id: 3,
+      backup: true
+    },
+    {
+      id: 4,
+      down: true
+    }
+  ],
+  method: 'least_conn'
+}
+```
+
+#### Payload Parameters
+
+| Key       | Description                                |
+| --------- | ------------------------------------------ |
+| servers   | Array of servers to distribute traffic to. |
+| method    | The type of load balancing to apply.       |
+
+#### Load Balancing Methods
+
+| Key       | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
+| round_robin `default` | Requests are evenly distributed across servers.                                 |
+| least_conn            | Requests are sent to the server with the least number of active connections.    |
+| ip_hash               | The server to which a request is sent is determined from the client IP address. |
+
+---
+
+## Site log
+
+### Method
+
+`forge.sites.log(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const siteLog = await forge.sites.log(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "content": "[2020-08-18 10:32:56] local.INFO: Test  \n"
+}
+```
+
+---

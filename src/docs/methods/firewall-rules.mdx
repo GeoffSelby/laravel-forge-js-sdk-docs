@@ -1,0 +1,138 @@
+---
+title: 'Firewall Rules'
+description: Laravel Forge JavaScript SDK firewall rules module.
+---
+
+## Create a rule
+
+### Method
+
+`forge.firewallRules.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const rule = await forge.firewallRules.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'rule name',
+  ip_address: '192.168.1.1',
+  port: 88,
+  type: 'allow'
+}
+```
+
+#### Payload Parameters
+
+| Key        | Description                                     |
+| ---------- | ----------------------------------------------- |
+| name       | The name of the new firewall rule.              |
+| ip_address | The ip address to either allow or deny.         |
+| port       | The port that the rule should apply to.         |
+| type       | You may specify allow or deny as the rule type. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "rule": {
+    "id": 4,
+    "name": "rule",
+    "port": 123,
+    "type": "allow",
+    "ip_address": null,
+    "status": "installing",
+    "created_at": "2016-12-16 15:50:17"
+  }
+}
+```
+
+---
+
+## List firewall rules
+
+### Method
+
+`forge.firewallRules.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const rules = await forge.firewallRules.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "rules": [
+    {
+      "id": 4,
+      "name": "rule",
+      "port": 123,
+      "type": "allow",
+      "ip_address": null,
+      "status": "installing",
+      "created_at": "2016-12-16 15:50:17"
+    }
+  ]
+}
+```
+
+---
+
+## Get a firewall rule
+
+### Method
+
+`forge.firewallRules.get(server_id, rule_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const rule = await forge.firewallRules.get(server_id, rule_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "rule": {
+    "id": 4,
+    "name": "rule",
+    "port": 123,
+    "type": "allow",
+    "ip_address": null,
+    "status": "installing",
+    "created_at": "2016-12-16 15:50:17"
+  }
+}
+```
+
+---
+
+## Delete a firewall rule
+
+### Method
+
+`forge.firewallRules.delete(server_id, rule_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.firewallRules.delete(server_id, rule_id);
+```
+
+---

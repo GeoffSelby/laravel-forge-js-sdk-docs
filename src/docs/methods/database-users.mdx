@@ -1,0 +1,187 @@
+---
+title: 'Database Users'
+description: Laravel Forge JavaScript SDK database users module.
+---
+
+## Create a database user
+
+### Method
+
+`forge.databaseUsers.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const user = await forge.databaseUsers.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+name: 'forge',
+password: 'dolores',
+databases: [
+  1
+]
+```
+
+#### Payload Parameters
+
+| Key       | Description                                                                |
+| --------- | -------------------------------------------------------------------------- |
+| name      | The username for the new user.                                             |
+| password  | The password for the new user.                                             |
+| databases | An array of database IDs referencing the databases the user has access to. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "user": {
+    "id": 2,
+    "name": "forge",
+    "status": "installing",
+    "created_at": "2016-12-16 16:19:01",
+    "databases": [
+      1
+    ]
+  }
+}
+```
+
+---
+
+## List database users
+
+### Method
+
+`forge.databaseUsers.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const users = await forge.databaseUsers.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "forge",
+      "status": "installing",
+      "created_at": "2016-12-16 16:19:01",
+      "databases": [
+        1
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## Get a database user
+
+### Method
+
+`forge.databaseUsers.get(server_id, user_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const user = await forge.databaseUsers.get(server_id, user_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "user": {
+    "id": 2,
+    "name": "forge",
+    "status": "installing",
+    "created_at": "2016-12-16 16:19:01",
+    "databases": [
+      1
+    ]
+  }
+}
+```
+
+---
+
+## Update a database user
+
+This method may be used to update the databases the Database User has access to.
+
+### Method
+
+`forge.databaseUsers.update(server_id, user_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const updatedUser = await forge.databaseUsers.update(server_id, user_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  databases: [
+    2
+  ]
+}
+```
+
+#### Payload Parameters
+
+| Key       | Description                                                                |
+| --------- | -------------------------------------------------------------------------- |
+| databases | An array of database IDs referencing the databases the user has access to. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "user": {
+    "id": 2,
+    "name": "forge",
+    "status": "installing",
+    "created_at": "2016-12-16 16:19:01",
+    "databases": [
+      1,
+      2
+    ]
+  }
+}
+```
+
+---
+
+## Delete a database user
+
+### Method
+
+`forge.databaseUsers.delete(server_id, user_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.databaseUsers.delete(server_id, user_id);
+```
+
+---

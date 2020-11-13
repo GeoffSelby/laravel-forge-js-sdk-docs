@@ -1,0 +1,130 @@
+---
+title: 'SSH Keys'
+description: Laravel Forge JavaScript SDK SSH keys module.
+---
+
+## Create a SSH key
+
+### Method
+
+`forge.ssh.create(server_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const key = await forge.ssh.create(server_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'test-key',
+  key: 'KEY_CONTENT',
+  username: 'forge'
+}
+```
+
+#### Payload Parameters
+
+| Key      | Description                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------- |
+| name     | The name of the ssh key.                                                                                        |
+| key      | The content of the key.                                                                                         |
+| username | The username of the user you want to add the key to. If you are not using User Isolation, this will be `forge`. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "key": {
+    "id": 9,
+    "name": "test-key",
+    "username": "forge",
+    "status": "installing",
+    "created_at": "2016-12-16 16:31:16"
+  }
+}
+```
+
+---
+
+## List all SSH keys
+
+### Method
+
+`forge.ssh.list(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const keys = await forge.ssh.list(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "keys": [
+    {
+      "id": 9,
+      "name": "test-key",
+      "username": "forge",
+      "status": "installing",
+      "created_at": "2016-12-16 16:31:16"
+    }
+  ]
+}
+```
+
+---
+
+## Get a SSH key
+
+### Method
+
+`forge.ssh.get(server_id, key_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const key = await forge.ssh.get(server_id, key_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "key": {
+    "id": 9,
+    "name": "test-key",
+    "username": "forge",
+    "status": "installing",
+    "created_at": "2016-12-16 16:31:16"
+  }
+}
+```
+
+---
+
+## Delete a SSH key
+
+### Method
+
+`forge.ssh.delete(server_id, key_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.ssh.delete(server_id, key_id);
+```
+
+---

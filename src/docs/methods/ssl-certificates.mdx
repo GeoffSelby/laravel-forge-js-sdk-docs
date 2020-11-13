@@ -1,0 +1,342 @@
+---
+title: 'SSL Certificates'
+description: Laravel Forge JavaScript SDK SSL certificates module.
+---
+
+## Create a certificate
+
+### Method
+
+`forge.ssl.create(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const certificate = await forge.ssl.create(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  type: 'new',
+  domain: 'domain.com',
+  country: 'US',
+  state: 'NY',
+  city: 'New York',
+  organization: 'Company Name',
+  department: 'IT'
+}
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificate": {
+    "domain": "domain.com",
+    "request_status": "creating",
+    "created_at": "2016-12-17 07:02:35",
+    "id": 3,
+    "existing": false,
+    "active": false
+  }
+}
+```
+
+---
+
+## Installing an existing certificate
+
+### Method
+
+`forge.ssl.installExisting(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const certificate = await forge.ssl.installExisting(
+  server_id,
+  site_id,
+  payload,
+);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  type: 'existing',
+  key: 'PRIVATE_KEY_HERE',
+  certificate: 'CERTIFICATE_HERE'
+}
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificate": {
+    "domain": "domain.com",
+    "request_status": "creating",
+    "created_at": "2016-12-17 07:02:35",
+    "id": 3,
+    "existing": false,
+    "active": false
+  }
+}
+```
+
+---
+
+## Cloning an existing certificate
+
+### Method
+
+`forge.ssl.clone(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const clonedCertificate = await forge.ssl.clone(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  type: 'clone',
+  certificate_id: 1
+}
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificate": {
+    "domain": "domain.com",
+    "request_status": "creating",
+    "created_at": "2016-12-17 07:02:35",
+    "id": 3,
+    "existing": false,
+    "active": false
+  }
+}
+```
+
+---
+
+## Obtain a LetsEncrypt Certificate
+
+### Method
+
+`forge.ssl.letsencrypt(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const letsEncrypt = await forge.ssl.letsencrypt(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  domains: ['www.site.com'],
+  dns_provider: {
+    type: 'xxx',
+    cloudflare_api_token: 'xxx',
+    route53_key: 'xxx',
+    route53_secret: 'xxx',
+    digitalocean_token: 'xxx',
+    dnssimple_token: 'xxx',
+    linode_token: 'xxx',
+    ovh_endpoint: 'xxx',
+    ovh_app_key: 'xxx',
+    ovh_app_secret: 'xxx',
+    ovh_consumer_key: 'xxx',
+    google_credentials_file: 'xxx',
+  }
+}
+```
+
+> The `dns_provider` object is only required for wildcard sub-domains.
+
+#### DNS Provider Types
+
+| Type         | Extra Fields                                                           |
+| ------------ | ---------------------------------------------------------------------- |
+| cloudflare   | `cloudflare_api_token`                                                 |
+| route53      | `route53_key` and `route53_secret`                                     |
+| digitalocean | `digitalocean_token`                                                   |
+| dnssimple    | `dnssimple_token`                                                      |
+| linode       | `linode_token`                                                         |
+| ovh          | `ovh_endpoint`, `ovh_app_key`, `ovh_app_secret` and `ovh_consumer_key` |
+| google       | `google_credentials_file`                                              |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificate": {
+    "domain": "www.test.com",
+    "type": "letsencrypt",
+    "request_status": "created",
+    "status": "installing",
+    "created_at": "2017-02-09 17:14:34",
+    "id": 1,
+    "existing": true,
+    "active": false
+  }
+}
+```
+
+---
+
+## List certificates
+
+### Method
+
+`forge.ssl.list(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const certificates = await forge.ssl.list(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificates": [
+    {
+      "domain": "domain.com",
+      "request_status": "creating",
+      "created_at": "2016-12-17 07:02:35",
+      "id": 3,
+      "existing": false,
+      "active": false
+    }
+  ]
+}
+```
+
+---
+
+## Get a certificate
+
+### Method
+
+`forge.ssl.get(server_id, site_id, certificate_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const certificate = await forge.ssl.get(server_id, site_id, certificate_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "certificate": {
+    "domain": "domain.com",
+    "request_status": "creating",
+    "created_at": "2016-12-17 07:02:35",
+    "id": 3,
+    "existing": false,
+    "active": false
+  }
+}
+```
+
+---
+
+## Get signing request
+
+### Method
+
+`forge.ssl.csr(server_id, site_id, certificate_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const csr = await forge.ssl.csr(server_id, site_id, certificate_id);
+```
+
+---
+
+## Install a certificate
+
+This endpoint may be used to get the full certificate signing request content.
+
+### Method
+
+`forge.ssl.install(server_id, site_id, cert_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.ssl.install(server_id, site_id, cert_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  certificate: 'certificate content',
+  add_intermediates: false
+}
+```
+
+---
+
+## Activate certificate
+
+### Method
+
+`forge.ssl.activate(server_id, site_id, certificate_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.ssl.activate(server_id, site_id, certificate_id);
+```
+
+---
+
+## Delete certificate
+
+### Method
+
+`forge.ssl.delete(server_id, site_id, certificate_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.ssl.delete(server_id, site_id, certificate_id);
+```
+
+---

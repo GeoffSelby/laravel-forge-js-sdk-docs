@@ -1,0 +1,210 @@
+---
+title: 'Recipes'
+description: Laravel Forge JavaScript SDK recipes module.
+---
+
+## Create a recipe
+
+### Method
+
+`forge.recipes.create(payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const recipe = await forge.recipes.create(payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'Recipe Name',
+  user: 'root',
+  script: 'SCRIPT_CONTENT'
+}
+```
+
+#### Payload Parameters
+
+| Key    | Description                       |
+| ------ | --------------------------------- |
+| name   | The name of the recipe.           |
+| user   | The user to run the recipe as.    |
+| script | The content of the script to run. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "recipe": {
+    "id": 1,
+    "name": "Recipe Name",
+    "user": "root",
+    "script": "SCRIPT_CONTENT",
+    "created_at": "2016-12-16 16:24:05"
+  }
+}
+```
+
+---
+
+## List all recipes
+
+### Method
+
+`forge.recipes.list()`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const recipes = await forge.recipes.list();
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Recipe Name",
+      "user": "root",
+      "script": "SCRIPT_CONTENT",
+      "created_at": "2016-12-16 16:24:05"
+    }
+  ]
+}
+```
+
+---
+
+## Get a recipe
+
+### Method
+
+`forge.recipes.get(recipe_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const recipe = await forge.recipes.get(recipe_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "recipe": {
+    "id": 1,
+    "name": "Recipe Name",
+    "user": "root",
+    "script": "SCRIPT_CONTENT",
+    "created_at": "2016-12-16 16:24:05"
+  }
+}
+```
+
+---
+
+## Update a recipe
+
+### Method
+
+`forge.recipes.update(recipe_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const recipe = await forge.recipes.update(recipe_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  name: 'Recipe Name',
+  user: 'root',
+  script: 'SCRIPT_CONTENT'
+}
+```
+
+#### Payload Parameters
+
+| Key    | Description                       |
+| ------ | --------------------------------- |
+| name   | The name of the recipe.           |
+| user   | The user to run the recipe as.    |
+| script | The content of the script to run. |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "recipe": {
+    "id": 1,
+    "name": "Recipe Name",
+    "user": "root",
+    "script": "SCRIPT_CONTENT",
+    "created_at": "2016-12-16 16:24:05"
+  }
+}
+```
+
+---
+
+## Delete a recipe
+
+### Method
+
+`forge.recipes.delete(recipe_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.recipes.delete(recipe_id);
+```
+
+---
+
+## Run a recipe
+
+### Method
+
+`forge.recipes.run(recipe_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.recipes.run(recipe_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  servers: [1, 2],
+  notify: true
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description                                                                                |
+| ------- | ------------------------------------------------------------------------------------------ |
+| servers | Array of server id's to run the recipe on.                                                 |
+| notify  | Whether to send a notification upon recipe completion. Valid values are `true` or `false`. |
+
+---

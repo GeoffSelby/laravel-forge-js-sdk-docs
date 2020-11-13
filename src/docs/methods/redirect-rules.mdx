@@ -1,0 +1,129 @@
+---
+title: 'Redirect Rules'
+description: Laravel Forge JavaScript redirect rules module.
+---
+
+## Create a redirect rule
+
+### Method
+
+`forge.redirect.create(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const redirectRule = await forge.redirect.create(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  from: '/docs',
+  to: '/docs/1.1',
+  type: 'redirect'
+}
+```
+
+#### Redirect Types
+
+| Type      | Description                       |
+| --------- | --------------------------------- |
+| redirect  | Creates a temporary 302 redirect. |
+| permanent | Create a permanent 301 redirect.  |
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "redirect_rule": {
+    "id": 15,
+    "from": "/docs",
+    "to": "/docs/1.1",
+    "type": "redirect",
+    "created_at": "2018-03-07 16:33:20"
+  }
+}
+```
+
+---
+
+## List redirect rules
+
+### Method
+
+`forge.redirect.list(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const redirectRules = await forge.redirect.list(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "redirect_rules": [
+    {
+      "id": 15,
+      "from": "/docs",
+      "to": "/docs/1.1",
+      "type": "redirect",
+      "created_at": "2018-03-07 16:33:20"
+    }
+  ]
+}
+```
+
+---
+
+## Get a redirect rule
+
+### Method
+
+`forge.redirect.get(server_id, site_id, rule_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const redirectRule = await forge.redirect.get(server_id, site_id, rule_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "redirect_rule": {
+    "id": 15,
+    "from": "/docs",
+    "to": "/docs/1.1",
+    "type": "redirect",
+    "created_at": "2018-03-07 16:33:20"
+  }
+}
+```
+
+---
+
+## Delete a redirect rule
+
+### Method
+
+`forge.redirect.delete(server_id, site_id, rule_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.redirect.delete(server_id, site_id, rule_id);
+```
+
+---
