@@ -1,0 +1,122 @@
+---
+title: 'Site Commands'
+description: Laravel Forge JavaScript SDK site commands module
+---
+
+## Execute a command
+
+### Method
+
+`forge.commands.execute(server_id, site_id, payload)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.commands.execute(server_id, site_id, payload);
+```
+
+### Payload
+
+```js lineNumbers=true
+{
+  command: 'ls -la';
+}
+```
+
+#### Payload Parameters
+
+| Key     | Description        |
+| ------- | ------------------ |
+| command | Command to be run. |
+
+---
+
+## List command history
+
+### Method
+
+`forge.commands.list(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.commands.list(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "commands": [
+    {
+      "id": 68,
+      "server_id": 34,
+      "site_id": 48,
+      "user_id": 1,
+      "event_id": 730,
+      "command": "ls -lah",
+      "status": "finished",
+      "created_at": "2021-04-16 14:46:55",
+      "updated_at": "2021-04-16 14:47:00",
+      "profile_photo_url": "https://unavatar.vercel.app/james%40brooks.page?fallback=https%3A%2F%2Fui-avatars.com%2Fapi%3Fname%3DJames%2BBrooks%26color%3D7F9CF4%26background%3DEBF4FF",
+      "user_name": "James Brooks"
+    },
+    {
+      "id": 69,
+      "server_id": 34,
+      "site_id": 48,
+      "user_id": 1,
+      "event_id": 731,
+      "command": "echo 'Hello!'",
+      "status": "finished",
+      "created_at": "2021-04-16 14:48:01",
+      "updated_at": "2021-04-16 14:48:07",
+      "profile_photo_url": "https://unavatar.vercel.app/james%40brooks.page?fallback=https%3A%2F%2Fui-avatars.com%2Fapi%3Fname%3DJames%2BBrooks%26color%3D7F9CF4%26background%3DEBF4FF",
+      "user_name": "James Brooks"
+    }
+  ]
+}
+```
+
+---
+
+## Get a command by id
+
+### Method
+
+`forge.commands.get(server_id, site_id, command_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.commands.get(server_id, site_id, command_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "command": {
+    "id": 69,
+    "server_id": 34,
+    "site_id": 48,
+    "user_id": 1,
+    "event_id": 731,
+    "command": "echo 'Hello!'",
+    "status": "finished",
+    "created_at": "2021-04-16 14:48:01",
+    "updated_at": "2021-04-16 14:48:07",
+    "profile_photo_url": "https://unavatar.vercel.app/james%40brooks.page?fallback=https%3A%2F%2Fui-avatars.com%2Fapi%3Fname%3DJames%2BBrooks%26color%3D7F9CF4%26background%3DEBF4FF",
+    "user_name": "James Brooks"
+  },
+  "output": "Hello!"
+}
+```
+
+---

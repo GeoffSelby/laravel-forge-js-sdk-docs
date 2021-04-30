@@ -44,6 +44,8 @@
       link: '/methods/configuration-files'
     - label: 'git Projects'
       link: '/methods/git-projects'
+    - label: 'Site Commands'
+      link: '/methods/site-commands'
     - label: 'WordPress'
       link: '/methods/wordpress'
     - label: 'phpMyAdmin'
