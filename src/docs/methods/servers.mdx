@@ -22,6 +22,7 @@ const user = await forge.servers.create(payload);
 ```js lineNumbers=true
 {
   provider: 'ocean2',
+  type: 'web',
   credential_id: 1,
   name: 'test-via-api',
   size: '512MB',
@@ -34,23 +35,24 @@ const user = await forge.servers.create(payload);
 
 #### Payload Parameters
 
-| Key                | Description                                                                                                                                                                |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| provider           | The server provider. Valid values are `ocean2` for Digital Ocean, `linode`, `vultr`, `aws`, `hetzner` and `custom`.                                                        |
-| credential_id      | This is only required when the provider is not `custom`.                                                                                                                   |
-| region             | The name of the region where the server will be created. This value is not required you are building a Custom VPS server. [Valid region identifiers](https://example.com). |
-| ip_address         | The IP Address of the server. Only required when the provider is `custom`.                                                                                                 |
-| private_ip_address | The Private IP Address of the server. Only required when the provider is `custom`.                                                                                         |
-| php_version        | Valid values are `php74`, `php73`, `php72`, `php71`, `php70`, and `php56`.                                                                                                 |
-| database           | The name of the database Forge should create when building the server. If omitted, `forge` will be used.                                                                   |
-| maria              | Indicates if MariaDB should be installed. Otherwise, MySQL will be installed.                                                                                              |
-| database_type      | Valid values are `mysql`, `mysql8`, `mariadb`, `postgres`.                                                                                                                 |
-| node_balancer      | Determines if the server should be provisioned as a load balancer.                                                                                                         |
-| network            | An array of server IDs that the server should be able to connect to.                                                                                                       |
-| recipe_id          | An optional ID of a recipe to run after provisioning.                                                                                                                      |
-| aws_vpc_id         | ID of the existing VPC                                                                                                                                                     |
-| aws_subnet_id      | ID of the existing subnet                                                                                                                                                  |
-| aws_vpc_name       | When creating a new one                                                                                                                                                    |
+| Key                | Description                                                                                                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| provider           | The server provider. Valid values are `ocean2` for Digital Ocean, `linode`, `vultr`, `aws`, `hetzner` and `custom`.                                                         |
+| type               | The type of server to create. Valid values are `app`, `web`, `loadbalancer`, `cache`, `database`, `worker`, `meilisearch`. `app` is used by default if no value is defined. |
+| credential_id      | This is only required when the provider is not `custom`.                                                                                                                    |
+| region             | The name of the region where the server will be created. This value is not required you are building a Custom VPS server. [Valid region identifiers](https://example.com).  |
+| ip_address         | The IP Address of the server. Only required when the provider is `custom`.                                                                                                  |
+| private_ip_address | The Private IP Address of the server. Only required when the provider is `custom`.                                                                                          |
+| php_version        | Valid values are `php80`, `php74`, `php73`, `php72`, `php71`, `php70`, and `php56`.                                                                                         |
+| database           | The name of the database Forge should create when building the server. If omitted, `forge` will be used.                                                                    |
+| maria              | Indicates if MariaDB should be installed. Otherwise, MySQL will be installed.                                                                                               |
+| database_type      | Valid values are `mysql`, `mysql8`, `mariadb`, `postgres`.                                                                                                                  |
+| node_balancer      | Determines if the server should be provisioned as a load balancer.                                                                                                          |
+| network            | An array of server IDs that the server should be able to connect to.                                                                                                        |
+| recipe_id          | An optional ID of a recipe to run after provisioning.                                                                                                                       |
+| aws_vpc_id         | ID of the existing VPC                                                                                                                                                      |
+| aws_subnet_id      | ID of the existing subnet                                                                                                                                                   |
+| aws_vpc_name       | When creating a new one                                                                                                                                                     |
 
 ### Example Response
 
@@ -59,6 +61,7 @@ const user = await forge.servers.create(payload);
   "server": {
     "id": 16,
     "credential_id": 1,
+    "type": "web",
     "name": "test-via-api",
     "size": "01",
     "region": "ams2",
