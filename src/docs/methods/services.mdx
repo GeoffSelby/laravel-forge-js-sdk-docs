@@ -157,6 +157,30 @@ await forge.services.stopNginx(server_id);
 
 ---
 
+## Test Nginx
+
+### Method
+
+`forge.services.testNginx(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.services.testNginx(server_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "result": "nginx: [emerg] a duplicate listen 0.0.0.0:80 in /etc/nginx/sites-enabled/default:6\nnginx: configuration file /etc/nginx/nginx.conf test failed\n"
+}
+```
+
+---
+
 ## Reboot Postgres
 
 ### Method

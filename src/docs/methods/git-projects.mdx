@@ -90,3 +90,43 @@ await forge.git.remove(server_id, site_id);
 ```
 
 ---
+
+## Create a deploy key
+
+### Method
+
+`forge.git.createDeployKey(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const deployKey = await forge.git.createDeployKey(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDM9Uq4P4rrJCwFHqfvA5vJ6CfvlVZNpGeopmxXRKmN7yjyaMDXEBHSoOwftTsaqNE+Y1M12yctCUyyFpHxVHOhvqiT6XRsYVDSASMYm7rZWQjt\/zXJSdl80NvY\/2m5dSbLWfr9CoHcRROx3Ja213b8Qc9BOQfINbsT4OsGPrOlvpHyCFWDgu4wQvmVcmaGa2soJr92TaGTkJv6T73BjUXD8ZdfYmCkX5y3L2cXgUiNhcDTDm9G+tQebfdr77CRhGcOUi473MsSDuEPCV7RtDHSVA5\/SSSReZyOW3MocObl3LPyq18gmiX9kUO5bVCAev7Yf5QCB2SJFUl5StZ9Wn1yLtY+P02fFZNr+GrmqbAlhv2rTf8UqOBzal46j8oGYbBaRC4BvUKzmxjM7VbUVGO3+8DJIiJYSZoEr+9ptQbs+0YVo1lVah8O1TGm1uoh1LEV36d3GzHbeUjfN71Oqrq5929gt3Ppt\/phxSli7VAQgBIKYvhtWlVxeAz\/EekxMCYSmWT8ZtGOLWlFLQMNEFn5wP\/+CW5VxzQaQbvzsW4EEkBFH5BW0BRt99FQlbhJ7RZmRYD+v1r8Du8Er9I8WGj8f\/cP8PmxlfvVVPokrxvWr4E7GU5mNHIFQTz7hAq4DIxbaR96IEcd6INxa1wfoWgib+9YW77edyX1C1iF2bGGIw== worker@forge.laravel.com"
+}
+```
+
+---
+
+## Delete deploy key
+
+### Method
+
+`forge.git.deleteDeployKey(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+await forge.git.deleteDeployKey(server_id, site_id);
+```
+
+---

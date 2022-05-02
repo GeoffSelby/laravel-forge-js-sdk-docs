@@ -382,6 +382,52 @@ await forge.sites.delete(server_id, site_id);
 
 ### Method
 
+`forge.sites.getBalance(server_id, site_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const loadBalancers = await forge.sites.getBalance(server_id, site_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "nodes": [
+    {
+      "server_id": 2,
+      "weight": 5,
+      "down": false,
+      "backup": false,
+      "port": 80
+    },
+    {
+      "server_id": 3,
+      "weight": 1,
+      "down": false,
+      "backup": true,
+      "port": 80
+    },
+    {
+      "server_id": 4,
+      "weight": 1,
+      "down": true,
+      "backup": false,
+      "port": 80
+    }
+  ]
+}
+```
+
+---
+
+## Update Load balancing
+
+### Method
+
 `forge.sites.balance(server_id, site_id, payload)`
 
 ### Usage

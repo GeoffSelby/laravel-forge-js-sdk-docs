@@ -81,6 +81,37 @@ const templates = await forge.nginxTemplates.list(server_id);
 
 ---
 
+## Get the default Nginx template
+
+When a site is created without a custom Nginx template selected, this is the Nginx configuration that Forge will use.
+
+### Method
+
+`forge.nginxTemplates.getDefault(server_id, template_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const template = await forge.nginxTemplates.getDefault(server_id, template_id);
+```
+
+### Example Response
+
+```json lineNumbers=true
+{
+  "template": {
+    "id": 1,
+    "server_id": 50,
+    "name": "Forge Default",
+    "content": "..."
+  }
+}
+```
+
+---
+
 ## Get a Nginx template
 
 ### Method

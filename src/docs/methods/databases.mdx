@@ -50,6 +50,22 @@ const database = await forge.database.create(server_id, payload);
 
 ---
 
+## Sync database
+
+### Method
+
+`forge.database.sync(server_id)`
+
+### Usage
+
+```js lineNumbers=true
+const forge = new Forge('API_TOKEN');
+
+const database = await forge.database.sync(server_id);
+```
+
+---
+
 ## List databases
 
 ### Method
