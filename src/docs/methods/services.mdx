@@ -168,7 +168,7 @@ await forge.services.stopNginx(server_id);
 ```js lineNumbers=true
 const forge = new Forge('API_TOKEN');
 
-await forge.services.testNginx(server_id);
+const testNginx = await forge.services.testNginx(server_id);
 ```
 
 ### Example Response
